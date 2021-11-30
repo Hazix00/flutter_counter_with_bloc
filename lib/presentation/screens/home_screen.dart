@@ -71,6 +71,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
+            const SizedBox(
+              height: 24,
+            ),
+            Builder(
+              builder: (context) {
+                final counterValue = context.select(
+                    (CounterCubit counterCubit) =>
+                        counterCubit.state.counterValue);
+                return Text(
+                  'Counter: $counterValue',
+                  style: Theme.of(context).textTheme.subtitle1,
+                );
+              },
+            ),
+            const SizedBox(
+              height: 24,
+            ),
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
                 final message =
