@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_counter_with_bloc/extensions/enum_extensions.dart';
-import 'package:flutter_counter_with_bloc/logic/cubit/counter_cubit.dart';
-import 'package:flutter_counter_with_bloc/logic/cubit/internet/internet_cubit.dart';
-import 'package:flutter_counter_with_bloc/presentation/screens/base_screen.dart';
-import 'package:flutter_counter_with_bloc/presentation/screens/second_screen.dart';
+import 'package:flutter_counter_with_bloc/presentation/screens/settings_screen.dart';
 
+import '../../extensions/enum_extensions.dart';
+import '../../logic/cubit/counter/counter_cubit.dart';
+import '../../logic/cubit/internet/internet_cubit.dart';
+import 'base_screen.dart';
+import 'second_screen.dart';
 import 'third_screen.dart';
 
 class HomeScreen extends Screen {
@@ -24,6 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).pushNamed(SettingsScreen.routeName);
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -92,10 +101,12 @@ class _HomeScreenState extends State<HomeScreen> {
               listener: (context, state) {
                 final message =
                     state.wasIncremented ? 'Incremented' : 'Decremeted';
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(message),
-                  duration: const Duration(milliseconds: 700),
-                ));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(message),
+                    duration: const Duration(milliseconds: 700),
+                  ),
+                );
               },
               builder: (context, state) {
                 if (state.counterValue < 0) {
@@ -112,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
+                    context.read<CounterCubit>().decrement();
                   },
                   tooltip: 'Decrement',
                   heroTag: 'Decrement',
@@ -120,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 FloatingActionButton(
                   onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
+                    context.read<CounterCubit>().increment();
                   },
                   tooltip: 'Increment',
                   heroTag: 'Increment',

@@ -1,4 +1,4 @@
-import './string_extensions.dart';
+import 'string_extensions.dart';
 
 extension EnumValueToString on Enum {
   String enumToString() {

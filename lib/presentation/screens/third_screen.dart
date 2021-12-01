@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_counter_with_bloc/logic/cubit/counter_cubit.dart';
-import 'package:flutter_counter_with_bloc/presentation/screens/base_screen.dart';
+import '../../logic/cubit/counter/counter_cubit.dart';
+import 'base_screen.dart';
 
 class ThirdScreen extends Screen {
   const ThirdScreen({Key? key})

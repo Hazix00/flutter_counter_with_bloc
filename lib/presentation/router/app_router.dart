@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_counter_with_bloc/presentation/screens/settings_screen.dart';
 import '../screens/base_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/second_screen.dart';
@@ -17,6 +18,8 @@ class AppRouter {
         return getScreen(const SecondScreen());
       case ThirdScreen.routeName:
         return getScreen(const ThirdScreen());
+      case SettingsScreen.routeName:
+        return getScreen(const SettingsScreen());
       default:
         return null;
     }
