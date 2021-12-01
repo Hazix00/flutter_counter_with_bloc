@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_counter_with_bloc/constants/enums.dart';
 import 'package:flutter_counter_with_bloc/presentation/screens/settings_screen.dart';
 
 import '../../extensions/enum_extensions.dart';
@@ -43,6 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (state is InternetConnected) {
                   final connectionTypeText =
                       state.connectionType.enumToString();
+                  if (state.connectionType == ConnectionType.wifi) {
+                    context.read<CounterCubit>().increment();
+                  } else {
+                    context.read<CounterCubit>().decrement();
+                  }
                   return Text(
                     connectionTypeText,
                     style: Theme.of(context).textTheme.headline3,
@@ -83,11 +89,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 24,
             ),
-            Builder(
-              builder: (context) {
-                final counterValue = context.select(
-                    (CounterCubit counterCubit) =>
-                        counterCubit.state.counterValue);
+            BlocSelector<CounterCubit, CounterState, int>(
+              selector: (state) => state.counterValue,
+              builder: (context, counterValue) {
                 return Text(
                   'Counter: $counterValue',
                   style: Theme.of(context).textTheme.subtitle1,
