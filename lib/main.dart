@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_counter_with_bloc/logic/utilities/app_bloc_observer.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -21,6 +22,7 @@ void main() async {
       connectivity: Connectivity(),
     )),
     storage: storage,
+    blocObserver: AppBlocObserver(),
   );
 }
 
